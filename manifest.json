@@ -1,0 +1,541 @@
+[
+  {
+    "root": "agents",
+    "directory": "_shared",
+    "skill_name": "_shared",
+    "has_skill_md": false,
+    "description": null
+  },
+  {
+    "root": "agents",
+    "directory": "darwin-skill",
+    "skill_name": "darwin-skill",
+    "has_skill_md": true,
+    "description": "\"Darwin Skill 2.0 (达尔文.skill 2.0): autonomous skill optimizer, v2.0 integrates Microsoft Research SkillLens (arXiv 2605.23899) 9-dim rubric + SkillOpt (arXiv 2605.23904) validation..."
+  },
+  {
+    "root": "agents",
+    "directory": "huashu-nuwa",
+    "skill_name": "huashu-nuwa",
+    "has_skill_md": true,
+    "description": "| 女娲造人：输入人名/主题/甚至只是模糊需求，自动深度调研→思维框架提炼→生成可运行的人物Skill。 两种入口：(1)明确人名→直接蒸馏 (2)模糊需求→诊断推荐→再蒸馏。 触发词：「造skill」「蒸馏XX」「女娲」「造人」「XX的思维方式」「做个XX视角」「更新XX的skill」。 模糊需求也触发：「我想提升决策质量」「有没有一种思维方式能帮我......"
+  },
+  {
+    "root": "claude",
+    "directory": "_shared",
+    "skill_name": "_shared",
+    "has_skill_md": false,
+    "description": null
+  },
+  {
+    "root": "claude",
+    "directory": "daily-papers",
+    "skill_name": "daily-papers",
+    "has_skill_md": true,
+    "description": "| 每日论文推荐的一句话总入口。用户说“今日论文推荐”“过去3天论文推荐”“过去一周论文推荐” “最近3天论文”“看看这周有啥论文”时使用。 内部会自动串联论文抓取、推荐生成、重点论文笔记三步，无需用户手动拆开。"
+  },
+  {
+    "root": "claude",
+    "directory": "daily-papers-fetch",
+    "skill_name": "daily-papers-fetch",
+    "has_skill_md": true,
+    "description": "| 论文抓取（3 步流水线的第 1 步）。抓取 arXiv + HuggingFace 最新论文，打分筛选，富化信息， 输出到 /tmp/daily_papers_enriched.json 供后续 skill 使用。 触发词：\"论文抓取\"、\"跑一下论文抓取\" 支持多天模式：\"过去3天论文推荐\"、\"过去一周论文推荐\"、\"过去一周的论文\"、\"抓 3 天的论文\"..."
+  },
+  {
+    "root": "claude",
+    "directory": "daily-papers-notes",
+    "skill_name": "daily-papers-notes",
+    "has_skill_md": true,
+    "description": "| 论文笔记生成（3 步流水线的第 3 步）。补充概念库，为推荐论文生成完整笔记， 链接回填到推荐文件；目录页默认自动刷新，git 自动化默认关闭。 触发词：\"批量笔记\"、\"跑一下论文笔记\""
+  },
+  {
+    "root": "claude",
+    "directory": "daily-papers-review",
+    "skill_name": "daily-papers-review",
+    "has_skill_md": true,
+    "description": "| 论文点评（3 步流水线的第 2 步）。读取富化后的论文数据，扫描笔记库，生成有态度的推荐点评， 保存推荐文件到 Obsidian，更新 history；git 自动化默认关闭。 触发词：\"论文点评\"、\"跑一下论文点评\""
+  },
+  {
+    "root": "claude",
+    "directory": "generate-mocs",
+    "skill_name": "generate-mocs",
+    "has_skill_md": true,
+    "description": "| 重新生成 Obsidian 里的目录页 / 导航页（MOC）。 当用户说“更新索引”“更新论文和概念目录”“刷新论文和概念目录”“刷新MOC”时使用。"
+  },
+  {
+    "root": "claude",
+    "directory": "paper-reader",
+    "skill_name": "paper-reader",
+    "has_skill_md": true,
+    "description": "| Use when user asks to \"read paper\", \"analyze paper\", \"summarize paper\", \"读论文\", \"分析文献\", \"帮我看一下这篇paper\", \"论文笔记\", or provides a PDF file that appears to be an academic paper. Specia..."
+  },
+  {
+    "root": "claude",
+    "directory": "thesis-format",
+    "skill_name": "thesis-format",
+    "has_skill_md": true,
+    "description": "| 江苏科技大学本科毕业设计（论文）格式自动排版。基于《毕业设计(论文)撰写规范(理工类)》 对用户提供的 Word 论文进行全自动格式刷处理。支持自定义参数覆盖默认学校设置。"
+  },
+  {
+    "root": "codex",
+    "directory": "_shared",
+    "skill_name": "_shared",
+    "has_skill_md": false,
+    "description": null
+  },
+  {
+    "root": "codex",
+    "directory": "academic-paper-composer",
+    "skill_name": "academic-paper-composer",
+    "has_skill_md": true,
+    "description": "Use when the user needs to turn a real software engineering / computer science project and an existing thesis draft into a submission-ready undergraduate thesis manuscript. Trigger..."
+  },
+  {
+    "root": "codex",
+    "directory": "academic-paper-strategist",
+    "skill_name": "academic-paper-strategist",
+    "has_skill_md": true,
+    "description": "Use when the user needs to plan, de-risk, or ground a software engineering / computer science undergraduate thesis from a real codebase before final writing. Trigger for requests s..."
+  },
+  {
+    "root": "codex",
+    "directory": "andrej-karpathy-perspective",
+    "skill_name": "andrej-karpathy-perspective",
+    "has_skill_md": true,
+    "description": "| Andrej Karpathy的思维框架与表达方式。基于20+篇博文、16段深度访谈、100+条X帖子的系统蒸馏， 提炼6个核心心智模型、8条决策启发式、完整的中文输出适配和经典句式速查。 用途：作为思维顾问，用Karpathy的视角分析AI技术可靠性、学习方法、行业趋势、产品设计。 当用户提到「用Karpathy的视角」「Karpathy会怎么看」「卡..."
+  },
+  {
+    "root": "codex",
+    "directory": "awesome-ai-research-writing",
+    "skill_name": "awesome-ai-research-writing",
+    "has_skill_md": true,
+    "description": "Academic paper writing, paper analysis, and research-side workflow kit for bilingual Chinese-English research work. Use when Codex needs to draft, translate, polish, shorten, expan..."
+  },
+  {
+    "root": "codex",
+    "directory": "cli-anything",
+    "skill_name": "cli-anything",
+    "has_skill_md": true,
+    "description": "Use when the user wants Codex to build, refine, test, or validate a CLI-Anything harness for a GUI application or source repository. Adapts the CLI-Anything methodology to Codex wi..."
+  },
+  {
+    "root": "codex",
+    "directory": "cli-hub-meta-skill",
+    "skill_name": "cli-hub-meta-skill",
+    "has_skill_md": true,
+    "description": ">- Discover agent-native CLIs for professional software. Access the live catalog to find tools for creative workflows, productivity, AI, and more."
+  },
+  {
+    "root": "codex",
+    "directory": "daily-papers",
+    "skill_name": "daily-papers",
+    "has_skill_md": true,
+    "description": "| 每日论文推荐的一句话总入口。用户说“今日论文推荐”“过去3天论文推荐”“过去一周论文推荐” “最近3天论文”“看看这周有啥论文”时使用。 内部会自动串联论文抓取、推荐生成、重点论文笔记三步，无需用户手动拆开。"
+  },
+  {
+    "root": "codex",
+    "directory": "daily-papers-fetch",
+    "skill_name": "daily-papers-fetch",
+    "has_skill_md": true,
+    "description": "| 论文抓取（3 步流水线的第 1 步）。抓取 arXiv + HuggingFace 最新论文，打分筛选，富化信息， 输出到 /tmp/daily_papers_enriched.json 供后续 skill 使用。 触发词：\"论文抓取\"、\"跑一下论文抓取\" 支持多天模式：\"过去3天论文推荐\"、\"过去一周论文推荐\"、\"过去一周的论文\"、\"抓 3 天的论文\"..."
+  },
+  {
+    "root": "codex",
+    "directory": "daily-papers-notes",
+    "skill_name": "daily-papers-notes",
+    "has_skill_md": true,
+    "description": "| 论文笔记生成（3 步流水线的第 3 步）。补充概念库，为推荐论文生成完整笔记， 链接回填到推荐文件；目录页默认自动刷新，git 自动化默认关闭。 触发词：\"批量笔记\"、\"跑一下论文笔记\""
+  },
+  {
+    "root": "codex",
+    "directory": "daily-papers-review",
+    "skill_name": "daily-papers-review",
+    "has_skill_md": true,
+    "description": "| 论文点评（3 步流水线的第 2 步）。读取富化后的论文数据，扫描笔记库，生成有态度的推荐点评， 保存推荐文件到 Obsidian，更新 history；git 自动化默认关闭。 触发词：\"论文点评\"、\"跑一下论文点评\""
+  },
+  {
+    "root": "codex",
+    "directory": "develop-web-game",
+    "skill_name": "develop-web-game",
+    "has_skill_md": true,
+    "description": "\"Use when Codex is building or iterating on a web game (HTML/JS) and needs a reliable development + testing loop: implement small changes, run a Playwright-based test script with s..."
+  },
+  {
+    "root": "codex",
+    "directory": "doc",
+    "skill_name": "doc",
+    "has_skill_md": true,
+    "description": "\"Use when the task involves reading, creating, or editing `.docx` documents, especially when formatting or layout fidelity matters; prefer `python-docx` plus the bundled `scripts/r..."
+  },
+  {
+    "root": "codex",
+    "directory": "docx",
+    "skill_name": "docx",
+    "has_skill_md": true,
+    "description": "\"Use this skill whenever the user wants to create, read, edit, or manipulate Word documents (.docx files). Triggers include: any mention of 'Word doc', 'word document', '.docx', or..."
+  },
+  {
+    "root": "codex",
+    "directory": "engineering-thesis-rewriter",
+    "skill_name": "engineering-thesis-rewriter",
+    "has_skill_md": true,
+    "description": "Use this skill whenever the user asks to rewrite, polish, reduce AIGC traces, humanize, or adjust Chinese undergraduate/master engineering thesis text, especially for numerical sim..."
+  },
+  {
+    "root": "codex",
+    "directory": "feynman-perspective",
+    "skill_name": "feynman-perspective",
+    "has_skill_md": true,
+    "description": "| 理查德·费曼的思维框架与表达方式。基于40+个一手来源的深度调研， 提炼5个核心心智模型、8条决策启发式和完整的表达DNA。 用途：作为思维顾问，用费曼的视角分析问题、审视决策、提供反馈。 当用户提到「用费曼的视角」「费曼会怎么看」「费曼模式」「feynman perspective」「费曼学习法」时使用。 即使用户只是说「这是不是cargo cult」..."
+  },
+  {
+    "root": "codex",
+    "directory": "figma",
+    "skill_name": "figma",
+    "has_skill_md": true,
+    "description": "Use the Figma MCP server to fetch design context, screenshots, variables, and assets from Figma, and to translate Figma nodes into production code. Trigger when a task involves Fig..."
+  },
+  {
+    "root": "codex",
+    "directory": "figma-implement-design",
+    "skill_name": "figma-implement-design",
+    "has_skill_md": true,
+    "description": "\"Translate Figma nodes into production-ready code with 1:1 visual fidelity using the Figma MCP workflow (design context, screenshots, assets, and project-convention translation). T..."
+  },
+  {
+    "root": "codex",
+    "directory": "frontend-design",
+    "skill_name": "frontend-design",
+    "has_skill_md": true,
+    "description": "Create distinctive, production-grade frontend interfaces with high design quality. Use this skill when the user asks to build web components, pages, artifacts, posters, or applicat..."
+  },
+  {
+    "root": "codex",
+    "directory": "generate-mocs",
+    "skill_name": "generate-mocs",
+    "has_skill_md": true,
+    "description": "| 重新生成 Obsidian 里的目录页 / 导航页（MOC）。 当用户说“更新索引”“更新论文和概念目录”“刷新论文和概念目录”“刷新MOC”时使用。"
+  },
+  {
+    "root": "codex",
+    "directory": "gpt-image",
+    "skill_name": "gpt-image",
+    "has_skill_md": true,
+    "description": "General-purpose image generation and reference-image editing via OpenAI GPT Image 2 (`gpt-image-2`). Wraps the two official endpoints from the OpenAI cookbook — `/v1/images/generat..."
+  },
+  {
+    "root": "codex",
+    "directory": "image-enhancer",
+    "skill_name": "image-enhancer",
+    "has_skill_md": true,
+    "description": "Improves the quality of images, especially screenshots, by enhancing resolution, sharpness, and clarity. Perfect for preparing images for presentations, documentation, or social me..."
+  },
+  {
+    "root": "codex",
+    "directory": "imagegen",
+    "skill_name": "imagegen",
+    "has_skill_md": true,
+    "description": "\"Use when the user asks to generate or edit images via the OpenAI Image API (for example: generate image, edit/inpaint/mask, background removal or replacement, transparent backgrou..."
+  },
+  {
+    "root": "codex",
+    "directory": "mcp-builder",
+    "skill_name": "mcp-builder",
+    "has_skill_md": true,
+    "description": "Guide for creating high-quality MCP (Model Context Protocol) servers that enable LLMs to interact with external services through well-designed tools. Use when building MCP servers ..."
+  },
+  {
+    "root": "codex",
+    "directory": "munger-perspective",
+    "skill_name": "munger-perspective",
+    "has_skill_md": true,
+    "description": "| 查理·芒格的思维框架与表达方式。基于《穷查理宝典》、伯克希尔/Daily Journal股东会、 USC/哈佛演讲、访谈记录、外部批评等50+来源的深度调研， 提炼5个核心心智模型、8条决策启发式和完整的表达DNA。 用途：作为思维顾问，用芒格的视角分析问题、审视决策、提供反馈。 当用户提到「用芒格的视角」「芒格会怎么看」「芒格模式」「munger pe..."
+  },
+  {
+    "root": "codex",
+    "directory": "nature-data",
+    "skill_name": "nature-data",
+    "has_skill_md": true,
+    "description": ">- Prepare, audit, or revise Nature-ready Data Availability statements, data repository plans, dataset citations, and FAIR metadata checklists for manuscripts. Use when the user as..."
+  },
+  {
+    "root": "codex",
+    "directory": "nature-figure",
+    "skill_name": "nature-figure",
+    "has_skill_md": true,
+    "description": ">- Submission-grade Nature/high-impact journal figure workflow for Python or R. Use whenever the user asks to create, revise, audit, or polish manuscript figures, multi-panel scien..."
+  },
+  {
+    "root": "codex",
+    "directory": "nature-paper2ppt",
+    "skill_name": "nature-paper2ppt",
+    "has_skill_md": true,
+    "description": "Build a complete but efficient Nature-style Chinese PPTX presentation from a scientific paper, preprint, PDF, article text, abstract, figure legends, or reading notes. Use this ski..."
+  },
+  {
+    "root": "codex",
+    "directory": "nature-polishing",
+    "skill_name": "nature-polishing",
+    "has_skill_md": true,
+    "description": "Polish, restructure, or translate academic prose into Nature-leaning English using the paper-architecture and writing-strategy principles from Scientific English Writing & Communic..."
+  },
+  {
+    "root": "codex",
+    "directory": "obsidian",
+    "skill_name": "obsidian",
+    "has_skill_md": true,
+    "description": "Use this skill whenever the user mentions Obsidian, a vault, Markdown notes managed in Obsidian, daily notes, backlinks, wikilinks, MOCs, or asks to create/search/update notes in a..."
+  },
+  {
+    "root": "codex",
+    "directory": "openai-docs",
+    "skill_name": "openai-docs",
+    "has_skill_md": true,
+    "description": "\"Use when the user asks how to build with OpenAI products or APIs and needs up-to-date official documentation with citations, help choosing the latest model for a use case, or expl..."
+  },
+  {
+    "root": "codex",
+    "directory": "paper-reader",
+    "skill_name": "paper-reader",
+    "has_skill_md": true,
+    "description": "| Use when user asks to \"read paper\", \"analyze paper\", \"summarize paper\", \"读论文\", \"分析文献\", \"帮我看一下这篇paper\", \"论文笔记\", or provides a PDF file that appears to be an academic paper. Specia..."
+  },
+  {
+    "root": "codex",
+    "directory": "paper-reading",
+    "skill_name": "paper-reading",
+    "has_skill_md": true,
+    "description": "| Read, summarize, analyze, compare, and critique academic papers from local PDFs, paper titles, URLs, arXiv links, or pasted excerpts. Use when the user asks for things like \"读一下这..."
+  },
+  {
+    "root": "codex",
+    "directory": "pdf",
+    "skill_name": "pdf",
+    "has_skill_md": true,
+    "description": "Use this skill whenever the user wants to do anything with PDF files. This includes reading or extracting text/tables from PDFs, combining or merging multiple PDFs into one, splitt..."
+  },
+  {
+    "root": "codex",
+    "directory": "planning-with-files",
+    "skill_name": "planning-with-files",
+    "has_skill_md": true,
+    "description": "Persist task context into markdown planning files so future Codex turns can recover requirements, plans, decisions, current state, blockers, and touched files. Use when the user as..."
+  },
+  {
+    "root": "codex",
+    "directory": "playwright",
+    "skill_name": "playwright",
+    "has_skill_md": true,
+    "description": "\"Use when the task requires automating a real browser from the terminal (navigation, form filling, snapshots, screenshots, data extraction, UI-flow debugging) via `playwright-cli` ..."
+  },
+  {
+    "root": "codex",
+    "directory": "pptx",
+    "skill_name": "pptx",
+    "has_skill_md": true,
+    "description": "\"Use this skill any time a .pptx file is involved in any way — as input, output, or both. This includes: creating slide decks, pitch decks, or presentations; reading, parsing, or e..."
+  },
+  {
+    "root": "codex",
+    "directory": "research-paper-writing",
+    "skill_name": "research-paper-writing",
+    "has_skill_md": true,
+    "description": "Improve academic paper writing quality for ML/CV/NLP-style papers with clear section structure, paragraph flow, and reviewer-facing presentation. Use when drafting or revising Abst..."
+  },
+  {
+    "root": "codex",
+    "directory": "screenshot",
+    "skill_name": "screenshot",
+    "has_skill_md": true,
+    "description": "\"Use when the user explicitly asks for a desktop or system screenshot (full screen, specific app or window, or a pixel region), or when tool-specific capture capabilities are unava..."
+  },
+  {
+    "root": "codex",
+    "directory": "self-improvement",
+    "skill_name": "self-improvement",
+    "has_skill_md": true,
+    "description": "Use this skill when a command fails in a non-obvious way, the user corrects the agent, a recurring workaround appears, a project convention is discovered mid-task, or the user asks..."
+  },
+  {
+    "root": "codex",
+    "directory": "shipbuilding-grandmasters-framework",
+    "skill_name": "shipbuilding-grandmasters-framework",
+    "has_skill_md": true,
+    "description": "| 船舶工程宗师评判框架。Use this skill whenever the user asks to evaluate, critique, design, defend, revise, or understand a shipbuilding/naval-architecture problem, including hull form, ship..."
+  },
+  {
+    "root": "codex",
+    "directory": "skill-creator",
+    "skill_name": "skill-creator",
+    "has_skill_md": true,
+    "description": "Create new skills, modify and improve existing skills, and measure skill performance. Use when users want to create a skill from scratch, update or optimize an existing skill, run ..."
+  },
+  {
+    "root": "codex",
+    "directory": "superpower-brainstorming",
+    "skill_name": "superpower-brainstorming",
+    "has_skill_md": true,
+    "description": "\"You MUST use this before any creative work - creating features, building components, adding functionality, or modifying behavior. Explores user intent, requirements and design bef..."
+  },
+  {
+    "root": "codex",
+    "directory": "superpower-debugging",
+    "skill_name": "superpower-debugging",
+    "has_skill_md": true,
+    "description": "Use when encountering any bug, test failure, or unexpected behavior, before proposing fixes"
+  },
+  {
+    "root": "codex",
+    "directory": "superpower-dispatching-parallel",
+    "skill_name": "superpower-dispatching-parallel",
+    "has_skill_md": true,
+    "description": "Use when facing 2+ independent tasks that can be worked on without shared state or sequential dependencies - dispatch one spawn_agent per independent problem domain for concurrent ..."
+  },
+  {
+    "root": "codex",
+    "directory": "superpower-executing-plans",
+    "skill_name": "superpower-executing-plans",
+    "has_skill_md": true,
+    "description": "Use when you have a written implementation plan to execute in a separate session with review checkpoints"
+  },
+  {
+    "root": "codex",
+    "directory": "superpower-finish",
+    "skill_name": "superpower-finish",
+    "has_skill_md": true,
+    "description": "Use when implementation is complete, all tests pass, and you need to decide how to integrate the work - guides completion of development work by presenting structured options for m..."
+  },
+  {
+    "root": "codex",
+    "directory": "superpower-git-worktrees",
+    "skill_name": "superpower-git-worktrees",
+    "has_skill_md": true,
+    "description": "Use when starting feature work that needs isolation from current workspace or before executing implementation plans - creates isolated git worktrees with smart directory selection ..."
+  },
+  {
+    "root": "codex",
+    "directory": "superpower-receiving-code-review",
+    "skill_name": "superpower-receiving-code-review",
+    "has_skill_md": true,
+    "description": "Use when receiving code review feedback, before implementing suggestions, especially if feedback seems unclear or technically questionable - requires technical rigor and verificati..."
+  },
+  {
+    "root": "codex",
+    "directory": "superpower-review",
+    "skill_name": "superpower-review",
+    "has_skill_md": true,
+    "description": "Use when completing tasks, implementing major features, or before merging to verify work meets requirements"
+  },
+  {
+    "root": "codex",
+    "directory": "superpower-subagents",
+    "skill_name": "superpower-subagents",
+    "has_skill_md": true,
+    "description": "Use when executing implementation plans with independent tasks in the current session"
+  },
+  {
+    "root": "codex",
+    "directory": "superpower-tdd",
+    "skill_name": "superpower-tdd",
+    "has_skill_md": true,
+    "description": "Use when implementing any feature or bugfix, before writing implementation code"
+  },
+  {
+    "root": "codex",
+    "directory": "superpower-verification",
+    "skill_name": "superpower-verification",
+    "has_skill_md": true,
+    "description": "Use when about to claim work is complete, fixed, or passing, before committing or creating PRs - requires running verification commands and confirming output before making any succ..."
+  },
+  {
+    "root": "codex",
+    "directory": "superpower-writing-plans",
+    "skill_name": "superpower-writing-plans",
+    "has_skill_md": true,
+    "description": "Use when you have a spec or requirements for a multi-step task, before touching code"
+  },
+  {
+    "root": "codex",
+    "directory": "superpower-writing-skills",
+    "skill_name": "superpower-writing-skills",
+    "has_skill_md": true,
+    "description": "Use when creating new skills, editing existing skills, or verifying skills work before deployment - applies TDD methodology to process documentation with pressure testing via subag..."
+  },
+  {
+    "root": "codex",
+    "directory": "trailofbits-modern-python",
+    "skill_name": "modern-python",
+    "has_skill_md": true,
+    "description": "Configures Python projects with modern tooling (uv, ruff, ty). Use when creating projects, writing standalone scripts, or migrating from pip/Poetry/mypy/black."
+  },
+  {
+    "root": "codex",
+    "directory": "trailofbits-second-opinion",
+    "skill_name": "second-opinion",
+    "has_skill_md": true,
+    "description": "\"Runs external LLM code reviews (OpenAI Codex or Google Gemini CLI) on uncommitted changes, branch diffs, or specific commits. Use when the user asks for a second opinion, external..."
+  },
+  {
+    "root": "codex",
+    "directory": "webapp-testing",
+    "skill_name": "webapp-testing",
+    "has_skill_md": true,
+    "description": "Toolkit for interacting with and testing local web applications using Playwright. Supports verifying frontend functionality, debugging UI behavior, capturing browser screenshots, a..."
+  },
+  {
+    "root": "codex",
+    "directory": "xlsx",
+    "skill_name": "xlsx",
+    "has_skill_md": true,
+    "description": "\"Use this skill any time a spreadsheet file is the primary input or output. This means any task where the user wants to: open, read, edit, or fix an existing .xlsx, .xlsm, .csv, or..."
+  },
+  {
+    "root": "codex",
+    "directory": "xuzilong-academic",
+    "skill_name": "xuzilong-academic",
+    "has_skill_md": true,
+    "description": "Use when working in Xu Zilong academic projects with Data/Program/Results/Manuscripts/Submissions and needing stable interfaces between generated results, hand-edited manuscript in..."
+  },
+  {
+    "root": "codex",
+    "directory": "xuzilong-task-tracking",
+    "skill_name": "xuzilong-task-tracking",
+    "has_skill_md": true,
+    "description": "Use when the user explicitly invokes $xuzilong-task-tracking or explicitly asks to maintain Tasks/outline.md, Tasks/task-current.md, or task archives in Xu Zilong academic projects..."
+  },
+  {
+    "root": "codex",
+    "directory": "zongguan-skill",
+    "skill_name": "zongguan-skill",
+    "has_skill_md": true,
+    "description": "Use at the start of every new user task as the default lightweight skill-routing preflight, especially when the user wants one skill to choose, route, dispatch, or coordinate other..."
+  },
+  {
+    "root": "openclaw",
+    "directory": "feishu-doc",
+    "skill_name": "feishu-doc",
+    "has_skill_md": true,
+    "description": "| Feishu document read/write operations. Activate when user mentions Feishu docs, cloud docs, or docx links."
+  },
+  {
+    "root": "openclaw",
+    "directory": "feishu-drive",
+    "skill_name": "feishu-drive",
+    "has_skill_md": true,
+    "description": "| Feishu cloud storage file management. Activate when user mentions cloud space, folders, drive."
+  },
+  {
+    "root": "openclaw",
+    "directory": "feishu-perm",
+    "skill_name": "feishu-perm",
+    "has_skill_md": true,
+    "description": "| Feishu permission management for documents and files. Activate when user mentions sharing, permissions, collaborators."
+  },
+  {
+    "root": "openclaw",
+    "directory": "feishu-wiki",
+    "skill_name": "feishu-wiki",
+    "has_skill_md": true,
+    "description": "| Feishu knowledge base navigation. Activate when user mentions knowledge base, wiki, or wiki links."
+  }
+]

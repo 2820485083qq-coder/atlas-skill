@@ -1,0 +1,4 @@
+interface:
+  display_name: "xuzilong-academic"
+  short_description: "End-to-end research orchestrator with Program-first task tracking"
+  default_prompt: "Use xuzilong-academic to route work across Data/Program/Results/Manuscripts/Submissions, enforce reproducible contracts, and track Tasks only for Program changes or Program-linked manuscript updates."

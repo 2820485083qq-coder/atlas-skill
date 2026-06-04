@@ -1,0 +1,4 @@
+interface:
+  display_name: "Planning With Files"
+  short_description: "Persist plans and decisions in markdown."
+  default_prompt: "Use $planning-with-files to create or update markdown planning files for this task."

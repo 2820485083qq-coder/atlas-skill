@@ -1,0 +1,25 @@
+{
+  "skill_name": "zongguan-skill",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "我有一篇PDF论文，想读懂核心方法，整理到Obsidian，还想生成一页汇报PPT。",
+      "expected_output": "Routes to paper-reading or paper-reader first, then obsidian for note placement, then pptx or nature-paper2ppt only if a slide file is required. It should not use generic writing as the primary skill."
+    },
+    {
+      "id": 2,
+      "prompt": "根据我的真实软件项目和已有初稿，把本科论文改成最终Word定稿，要求保留原图表。",
+      "expected_output": "Routes to academic-paper-strategist, then academic-paper-composer, then docx. It should preserve the original draft and avoid fabricating unsupported project claims."
+    },
+    {
+      "id": 3,
+      "prompt": "我想做一个本地网页小游戏，顺便用浏览器检查一下有没有显示问题。",
+      "expected_output": "Routes to develop-web-game or frontend-design for implementation, then webapp-testing or browser for verification. It should include a runnable local target and visual/browser validation."
+    },
+    {
+      "id": 4,
+      "prompt": "帮我优化我现在所有skill，先评分找问题，再小步改写验证。",
+      "expected_output": "Routes to darwin-skill for scoring and iterative optimization, with skill-creator only if structural skill rewriting or eval creation is needed. It should not load every skill body at once."
+    }
+  ]
+}
