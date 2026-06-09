@@ -56,6 +56,8 @@ If the user intent is unclear and the wrong route would waste significant work, 
 
 Read `references/skill-map.md` when routing is not obvious.
 
+For academic paper writing, translation, humanizing, reviewer-style audit, citation, LaTeX/Word submission, or research-figure tasks, also read `references/research-writing-routing.md`.
+
 Choose skills in this order:
 
 1. **User-named skill**: if the user names a skill, include it unless it is unavailable.
@@ -74,6 +76,7 @@ Use these precedence rules:
 - File-format skill controls the mechanics of a file; content skill controls the words, analysis, or structure.
 - "Read/analyze a paper" routes to paper-reading skills before generic academic writing.
 - "Polish/write a full paper" routes to `research-paper-writing` before lightweight writing helpers.
+- "Translate, shorten, expand, humanize, caption, or lightly review a paper paragraph" routes to `awesome-ai-research-writing` before full-paper writing skills.
 - "Nature style" routes to Nature-specific skills before generic academic writing.
 - "Undergraduate thesis from a real project" routes to `academic-paper-strategist` and `academic-paper-composer`.
 - "Word/docx final artifact" includes `docx` after content work is settled.

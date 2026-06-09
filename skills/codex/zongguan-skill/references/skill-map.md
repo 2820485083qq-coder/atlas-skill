@@ -16,6 +16,7 @@ This map reflects the user's visible Codex skill ecosystem at creation time. If 
 
 - `awesome-ai-research-writing`: lightweight academic writing, translation, humanizing, captions, short reviews, and research-side workflows.
 - `research-paper-writing`: full ML/CV/NLP-style paper writing, section structure, reviewer-facing revision, and deep prose improvement.
+- `structured-expression-frameworks`: structure professional communication with Pyramid Principle, SCQA, STAR, summaries, daily/weekly reports, and executive-report logic.
 - `paper-reading` / `paper-reader`: read, summarize, analyze, compare, or critique papers and PDFs.
 - `daily-papers`, `daily-papers-fetch`, `daily-papers-review`, `daily-papers-notes`: daily paper recommendation pipeline.
 - `nature-polishing`: Nature-leaning academic prose polishing and translation.
@@ -97,7 +98,12 @@ These are installed as low-conflict individual skills from the Codex Superpower 
 
 - `obsidian`: work with Obsidian vaults, notes, backlinks, and MOCs.
 - `generate-mocs`: regenerate Obsidian directory/navigation pages.
+- `knowledge-weekly-distiller`: run or design weekly knowledge-base distillation, Karpathy-style Markdown wiki linting, 每周蒸馏 reports, and Obsidian knowledge iteration automations.
 - `daily-papers-*`: paper recommendation and note pipeline.
+
+## Decision, Planning, And Structured Thinking
+
+- `decision-planning-frameworks`: structured decision support, 5Why root cause, SWOT, weighted pros/cons, decision tree, scenario planning, OKR, and goal-to-action planning.
 
 ## Perspective Skills
 
@@ -112,6 +118,10 @@ Use these only when the user asks for a specific person's lens or clearly invoke
 
 - "帮我读这篇论文并写笔记" -> `paper-reading` or `paper-reader`; add `obsidian` if notes must go into a vault.
 - "润色这段论文英文" -> `awesome-ai-research-writing`; use `research-paper-writing` for section-level or full-paper restructuring.
+- "中转英/英转中/缩写/扩写/去AI味/图题/表题/实验分析" -> read `research-writing-routing.md`; usually start with `awesome-ai-research-writing`.
+- "从repo或results写完整ML论文/开会议模板/改投/写Related Work/加引用" -> read `research-writing-routing.md`; usually start with `research-paper-writing`.
+- "arXiv源码翻译并编译" -> read `research-writing-routing.md`; use installed equivalents first, recommend `arxiv-translator-skill` only if full source translation/compilation is explicitly required.
+- "用金字塔/SCQA/STAR/周报结构帮我整理表达" -> `structured-expression-frameworks`; add `awesome-ai-research-writing` only when academic writing quality is the main objective.
 - "Nature风格润色/图/数据可用性" -> `nature-polishing`, `nature-figure`, or `nature-data`.
 - "根据真实项目写本科论文定稿" -> `academic-paper-strategist` -> `academic-paper-composer` -> `docx`.
 - "做PPT" -> `pptx`; if from a Nature paper, use `nature-paper2ppt`.
@@ -120,3 +130,5 @@ Use these only when the user asks for a specific person's lens or clearly invoke
 - "做网页/游戏并验证" -> `frontend-design` or `develop-web-game` -> `webapp-testing` or `browser`.
 - "从Figma实现页面" -> `figma` -> `figma-implement-design` -> browser verification.
 - "装/造/优化skill" -> `skill-installer`, `skill-creator`, or `darwin-skill`.
+- "每周蒸馏/知识库迭代/周五自动化知识库审计" -> `knowledge-weekly-distiller` -> `obsidian`; add `generate-mocs` only if index refresh is explicitly requested.
+- "5Why/SWOT/决策树/OKR/情景规划/利弊分析" -> `decision-planning-frameworks`.
