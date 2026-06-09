@@ -58,6 +58,8 @@ Read `references/skill-map.md` when routing is not obvious.
 
 For academic paper writing, translation, humanizing, reviewer-style audit, citation, LaTeX/Word submission, or research-figure tasks, also read `references/research-writing-routing.md`.
 
+For coding, refactoring, debugging, feature implementation, code review, or plan execution tasks, also read `references/coding-agent-routing.md`.
+
 Choose skills in this order:
 
 1. **User-named skill**: if the user names a skill, include it unless it is unavailable.
@@ -81,6 +83,7 @@ Use these precedence rules:
 - "Undergraduate thesis from a real project" routes to `academic-paper-strategist` and `academic-paper-composer`.
 - "Word/docx final artifact" includes `docx` after content work is settled.
 - "Create/update/install/optimize skills" routes to `skill-creator`, `skill-installer`, or `darwin-skill`.
+- "Code implementation/refactor/debug/review" routes through `karpathy-guidelines` before Superpower or domain-specific engineering skills when the task is non-trivial.
 - Perspective skills are advisory lenses, not execution engines; use them only when the user asks for that viewpoint.
 
 When two skills overlap, state the chosen primary skill and why in one sentence, then execute.

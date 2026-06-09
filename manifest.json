@@ -239,6 +239,13 @@
   },
   {
     "root": "codex",
+    "directory": "karpathy-guidelines",
+    "skill_name": "karpathy-guidelines",
+    "has_skill_md": true,
+    "description": "Behavioral guidelines to reduce common LLM coding mistakes. Use when writing, reviewing, or refactoring code to avoid overcomplication, make surgical changes, surface assumptions, ..."
+  },
+  {
+    "root": "codex",
     "directory": "mcp-builder",
     "skill_name": "mcp-builder",
     "has_skill_md": true,

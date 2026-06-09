@@ -69,6 +69,7 @@ These are plugin-provided routes when the Data Analytics plugin is available in 
 ## Engineering And Tooling
 
 - `modern-python`: configure Python projects with uv, ruff, and ty.
+- `karpathy-guidelines`: coding-agent behavior guardrails: think before coding, simplicity first, surgical changes, and goal-driven verification.
 - `mcp-builder`: create high-quality MCP servers.
 - `plugin-creator`: create Codex plugins.
 - `cli-anything`: build or test CLI-Anything harnesses.
@@ -129,6 +130,7 @@ Use these only when the user asks for a specific person's lens or clearly invoke
 - "处理PDF" -> `pdf`, unless the content is specifically a paper, then start with `paper-reading`.
 - "做网页/游戏并验证" -> `frontend-design` or `develop-web-game` -> `webapp-testing` or `browser`.
 - "从Figma实现页面" -> `figma` -> `figma-implement-design` -> browser verification.
+- "改代码/修bug/重构/写计划/代码审查" -> read `coding-agent-routing.md`; start with `karpathy-guidelines`, then choose the smallest Superpower/domain route.
 - "装/造/优化skill" -> `skill-installer`, `skill-creator`, or `darwin-skill`.
 - "每周蒸馏/知识库迭代/周五自动化知识库审计" -> `knowledge-weekly-distiller` -> `obsidian`; add `generate-mocs` only if index refresh is explicitly requested.
 - "5Why/SWOT/决策树/OKR/情景规划/利弊分析" -> `decision-planning-frameworks`.
