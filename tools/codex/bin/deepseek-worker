@@ -1,0 +1,266 @@
+#!/usr/bin/env node
+const fs = require("fs");
+const path = require("path");
+const { spawnSync } = require("child_process");
+
+const DEFAULT_MODEL = "deepseek-v4-flash";
+const DEFAULT_BASE_URL = "https://api.deepseek.com";
+
+function usage() {
+  process.stdout.write(`Usage:
+  deepseek-worker [options] "task"
+  printf "task" | deepseek-worker [options]
+
+Options:
+  --file <path>         Attach a local text file as context. Repeatable.
+  --model <model>       DeepSeek model. Default: ${DEFAULT_MODEL}
+  --max-tokens <n>      Max output tokens. Default: 4096
+  --temperature <n>     Temperature. Default: 0.2
+  --base-url <url>      Override DEEPSEEK_BASE_URL for this run.
+  --system <text>       Override system instruction.
+  --check-key           Verify the configured API key with a lightweight /models request.
+  --json                Print raw JSON response.
+  --dry-run             Validate input and show request summary without calling API.
+  -h, --help            Show this help.
+
+Environment:
+  DEEPSEEK_API_KEY      Required unless --dry-run is used. If unset, ~/.config/deepseek/key.env is read.
+  DEEPSEEK_BASE_URL     Optional. Default: ${DEFAULT_BASE_URL}
+
+Examples:
+  deepseek-worker "Summarize this repo structure"
+  deepseek-worker --file README.md "Extract action items"
+  rg -n "TODO|FIXME" | deepseek-worker "Group these TODOs by priority"
+`);
+}
+
+function readStdin() {
+  try {
+    if (fs.fstatSync(0).isFIFO() || fs.fstatSync(0).isFile()) {
+      return fs.readFileSync(0, "utf8").trim();
+    }
+  } catch (_) {}
+  return "";
+}
+
+function parseArgs(argv) {
+  const opts = {
+    files: [],
+    model: DEFAULT_MODEL,
+    maxTokens: 4096,
+    temperature: 0.2,
+    rawJson: false,
+    dryRun: false,
+    checkKey: false,
+    baseUrl: process.env.DEEPSEEK_BASE_URL || DEFAULT_BASE_URL,
+    system: [
+      "You are a low-cost DeepSeek worker used by a GPT orchestration agent.",
+      "Do simple, bounded rough work: file scanning summaries, extraction, grouping, first drafts, and batch checks.",
+      "Be concise, cite filenames when file context is provided, and do not claim to edit files.",
+      "If the task requires architectural judgment or final decisions, say what the parent GPT agent should decide."
+    ].join(" ")
+  };
+  const rest = [];
+  for (let i = 0; i < argv.length; i += 1) {
+    const arg = argv[i];
+    if (arg === "-h" || arg === "--help") {
+      opts.help = true;
+    } else if (arg === "--file") {
+      opts.files.push(argv[++i]);
+    } else if (arg === "--model") {
+      opts.model = argv[++i];
+    } else if (arg === "--max-tokens") {
+      opts.maxTokens = Number(argv[++i]);
+    } else if (arg === "--temperature") {
+      opts.temperature = Number(argv[++i]);
+    } else if (arg === "--base-url") {
+      opts.baseUrl = argv[++i];
+    } else if (arg === "--system") {
+      opts.system = argv[++i];
+    } else if (arg === "--check-key") {
+      opts.checkKey = true;
+    } else if (arg === "--json") {
+      opts.rawJson = true;
+    } else if (arg === "--dry-run") {
+      opts.dryRun = true;
+    } else {
+      rest.push(arg);
+    }
+  }
+  opts.task = rest.join(" ").trim();
+  return opts;
+}
+
+function readContextFiles(files) {
+  return files.map((file) => {
+    const full = path.resolve(file);
+    const stat = fs.statSync(full);
+    if (!stat.isFile()) throw new Error(`Not a file: ${file}`);
+    if (stat.size > 512 * 1024) {
+      throw new Error(`File too large for worker context (>512 KiB): ${file}`);
+    }
+    const text = fs.readFileSync(full, "utf8");
+    return `<file path="${full}">\n${text}\n</file>`;
+  }).join("\n\n");
+}
+
+function buildPrompt(task, stdinText, fileContext) {
+  const parts = [];
+  if (task) parts.push(`<task>\n${task}\n</task>`);
+  if (stdinText) parts.push(`<stdin>\n${stdinText}\n</stdin>`);
+  if (fileContext) parts.push(`<context_files>\n${fileContext}\n</context_files>`);
+  return parts.join("\n\n").trim();
+}
+
+function endpoint(baseUrl) {
+  const clean = baseUrl.replace(/\/+$/, "");
+  if (clean.endsWith("/v1")) return `${clean}/chat/completions`;
+  return `${clean}/chat/completions`;
+}
+
+function modelsEndpoint(baseUrl) {
+  const clean = baseUrl.replace(/\/+$/, "");
+  if (clean.endsWith("/v1")) return `${clean}/models`;
+  return `${clean}/models`;
+}
+
+function readKeyEnvFile() {
+  const keyFile = path.join(process.env.HOME || "", ".config", "deepseek", "key.env");
+  if (!keyFile || !fs.existsSync(keyFile)) return null;
+  const text = fs.readFileSync(keyFile, "utf8");
+  const match = text.match(/(?:^|\n)\s*(?:export\s+)?DEEPSEEK_API_KEY\s*=\s*["']?([^"'\n]+)["']?/);
+  return match ? match[1].trim() : null;
+}
+
+const opts = parseArgs(process.argv.slice(2));
+if (opts.help) {
+  usage();
+  process.exit(0);
+}
+
+const apiKey = process.env.DEEPSEEK_API_KEY || readKeyEnvFile();
+const baseUrl = opts.baseUrl;
+
+if (opts.checkKey) {
+  if (!apiKey) {
+    process.stderr.write("deepseek-worker: DEEPSEEK_API_KEY is not set. Run deepseek-worker-setup-key first.\n");
+    process.exit(2);
+  }
+  const result = spawnSync("curl", [
+    "-sS",
+    modelsEndpoint(baseUrl),
+    "-H", `Authorization: Bearer ${apiKey}`
+  ], { encoding: "utf8", maxBuffer: 16 * 1024 * 1024 });
+  if (result.error) {
+    process.stderr.write(`deepseek-worker: ${result.error.message}\n`);
+    process.exit(1);
+  }
+  if (result.status !== 0) {
+    process.stderr.write(result.stderr || `deepseek-worker: curl exited with ${result.status}\n`);
+    process.exit(result.status || 1);
+  }
+  let parsed;
+  try {
+    parsed = JSON.parse(result.stdout);
+  } catch (_) {
+    process.stdout.write(result.stdout);
+    process.exit(0);
+  }
+  if (parsed.error) {
+    process.stderr.write(`deepseek-worker: ${parsed.error.message || JSON.stringify(parsed.error)}\n`);
+    process.exit(1);
+  }
+  const models = Array.isArray(parsed.data) ? parsed.data.map((item) => item.id).filter(Boolean) : [];
+  process.stdout.write(JSON.stringify({
+    ok: true,
+    endpoint: modelsEndpoint(baseUrl),
+    model_count: models.length,
+    models: models.slice(0, 20)
+  }, null, 2) + "\n");
+  process.exit(0);
+}
+
+let fileContext = "";
+try {
+  fileContext = readContextFiles(opts.files);
+} catch (err) {
+  process.stderr.write(`deepseek-worker: ${err.message}\n`);
+  process.exit(2);
+}
+
+const stdinText = readStdin();
+const prompt = buildPrompt(opts.task, stdinText, fileContext);
+if (!prompt) {
+  usage();
+  process.exit(2);
+}
+
+const body = {
+  model: opts.model,
+  messages: [
+    { role: "system", content: opts.system },
+    { role: "user", content: prompt }
+  ],
+  temperature: opts.temperature,
+  max_tokens: opts.maxTokens
+};
+
+if (opts.dryRun) {
+  process.stdout.write(JSON.stringify({
+    ok: true,
+    endpoint: endpoint(baseUrl),
+    model: opts.model,
+    files: opts.files.map((file) => path.resolve(file)),
+    prompt_chars: prompt.length,
+    has_api_key: Boolean(apiKey)
+  }, null, 2) + "\n");
+  process.exit(0);
+}
+
+if (!apiKey) {
+  process.stderr.write("deepseek-worker: DEEPSEEK_API_KEY is not set. Put it in your shell environment or ~/.config/deepseek/key.env and source it.\n");
+  process.exit(2);
+}
+
+const result = spawnSync("curl", [
+  "-sS",
+  endpoint(baseUrl),
+  "-H", "Content-Type: application/json",
+  "-H", `Authorization: Bearer ${apiKey}`,
+  "-d", JSON.stringify(body)
+], { encoding: "utf8", maxBuffer: 64 * 1024 * 1024 });
+
+if (result.error) {
+  process.stderr.write(`deepseek-worker: ${result.error.message}\n`);
+  process.exit(1);
+}
+if (result.status !== 0) {
+  process.stderr.write(result.stderr || `deepseek-worker: curl exited with ${result.status}\n`);
+  process.exit(result.status || 1);
+}
+
+let parsed;
+try {
+  parsed = JSON.parse(result.stdout);
+} catch (_) {
+  process.stdout.write(result.stdout);
+  process.exit(0);
+}
+
+if (opts.rawJson) {
+  process.stdout.write(JSON.stringify(parsed, null, 2) + "\n");
+  process.exit(0);
+}
+
+if (parsed.error) {
+  process.stderr.write(`deepseek-worker: ${parsed.error.message || JSON.stringify(parsed.error)}\n`);
+  process.exit(1);
+}
+
+const message = parsed.choices && parsed.choices[0] && parsed.choices[0].message;
+const content = message && message.content;
+if (!content) {
+  process.stdout.write(JSON.stringify(parsed, null, 2) + "\n");
+  process.exit(0);
+}
+process.stdout.write(content.trim() + "\n");

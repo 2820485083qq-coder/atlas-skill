@@ -1,0 +1,31 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+config_dir="$HOME/.config/deepseek"
+key_file="$config_dir/key.env"
+
+mkdir -p "$config_dir"
+chmod 700 "$config_dir"
+
+printf "Paste DeepSeek API key: " >&2
+stty -echo
+IFS= read -r key
+stty echo
+printf "\n" >&2
+
+if [[ -z "$key" ]]; then
+  printf "No key provided. Nothing changed.\n" >&2
+  exit 2
+fi
+
+case "$key" in
+  sk-*) ;;
+  *)
+    printf "Warning: key does not start with sk-. Saving anyway.\n" >&2
+    ;;
+esac
+
+umask 077
+printf 'export DEEPSEEK_API_KEY=%q\n' "$key" > "$key_file"
+chmod 600 "$key_file"
+printf "Saved DeepSeek API key to %s\n" "$key_file"
