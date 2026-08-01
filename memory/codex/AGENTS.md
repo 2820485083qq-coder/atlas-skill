@@ -1,10 +1,12 @@
 # 主要记忆
 
-- 当 Codex 账号额度用完或当前 OpenAI/Codex 模型无法继续任务时，优先尝试通过 `cc switch` 切换到 DeepSeek 模型继续执行当前任务，并保留已有上下文与进度。
 - 当任务步骤较多、可以拆分为多个相对独立的子任务时，倾向于使用多个 subagent 并行推进；拆分前先判断共享上下文和文件冲突风险。
 - 下次执行任务时，将简单、重复、粗粒度的信息收集、批量检查、文件扫描、初稿整理等工作优先交给 subagent 执行；这些 subagent 优先使用 DeepSeek 模型，以节省 GPT token，让 GPT 模型专注于方向判断、架构决策、关键推理和最终把关。
-- 当前 Codex 内置 `spawn_agent` 不能直接选择 DeepSeek 时，使用本地 sidecar 命令 `~/.codex/bin/deepseek-worker` 承担上述粗活。API key 从 `DEEPSEEK_API_KEY` 或受权限保护的 `~/.config/deepseek/key.env` 读取；不要把密钥写入聊天记录或仓库文件。
-- 当用户要求“DeepSeek subagent”“省 GPT token”“把粗活交给 DeepSeek”或类似任务时，优先使用本地 `deepseek-worker` skill 进行路由。
+
+
+# 代码项目协作
+
+- 今后执行代码项目时，在项目根目录联合终端启动 `ccb`（Claude Code Best），让 Claude Code 参与合作编程、实现检查或第二视角审查；并行修改前先划分文件或任务边界，避免与 Codex 同时编辑同一文件造成冲突。
 
 # Matt skills 自然语言触发
 
@@ -14,6 +16,14 @@
 - 执行 grilling 时严格每次只问一个问题，每题都给出 Codex 的推荐答案，等待用户回复后再沿下一个决策分支继续；能通过检查代码库回答的事情先自行检查，不把可探索的问题丢给用户。
 - 当用户明确要求“直接修复/安装/实现/执行”，且不存在会实质改变结果的关键分歧时，不强行启动 grilling。
 
+# GitHub 发布
+
+- 当用户说“上传到 GitHub”“同步仓库”或给出 GitHub 仓库地址时，默认由 Codex 自动完成工作区检查、提交、认证、远程配置、推送和远程 SHA 验证，不要求用户手动输入终端命令。
+- 优先使用 `~/.local/bin/gh` 和已安装的 GitHub 插件；空仓库首次上传为 `main`，已有仓库默认推送功能分支并按需创建草稿 PR。
+- 上传前检查无关修改和明显密钥泄漏，推送后提供可点击的仓库或提交链接。
+- 只有遇到浏览器授权、混合工作区、覆盖远程历史或其他高风险操作时，才暂停并请求用户确认。
+- 不在聊天、日志或仓库文件中显示或保存 GitHub token。
+
 # 视觉、视频与浏览器工作流
 
 - 遇到 Figma 链接、node id、设计稿还原或设计到代码任务时，优先走 `figma` / `figma-implement-design`：先获取结构化 design context，再获取截图，再下载真实资产，之后才写代码；最终必须用截图对照验证布局、字体、颜色、资产和响应式状态，不能只凭记忆或单张截图实现。
@@ -21,3 +31,23 @@
 - 使用 `remotion` 时，遵守 Remotion 时间轴范式：用 `useCurrentFrame()`、`interpolate()`、`Sequence`、`staticFile()` 和 Remotion 媒体组件表达时间、素材和动画；避免 CSS transitions/animations 和 Tailwind animation 类；视频布局、字幕、音频、特效、3D、字体等复杂需求先读对应 `rules/*.md`。
 - 做网页或 Electron UI 验证时，优先用 `webapp-testing` 做一次性 Playwright 验证；需要多轮交互调试、截图复查、桌面/移动视口切换或 Electron 持久会话时，用 `playwright-interactive`。签收前要覆盖功能 QA、视觉 QA、视口适配、控制台错误和至少一个探索性路径；不能只看页面能打开就宣称完成。
 - 对设计/前端/视频产出，最终回复前要把“可见承诺”逐项映射到验证证据：Figma 对照截图、浏览器截图/交互结果、Remotion 单帧或渲染检查、HyperFrames lint/preview/render/validate 中适用的步骤。
+
+# GPT-5.6 动态任务路由
+
+本节把上面的多代理原则落实为固定、可审计的 Codex 代理。它优先于“简单信息收集优先使用 DeepSeek”的一般偏好：当下面的命名代理已加载时，按本节路由；模型或代理不可用时，退回 Sol 主线程并如实说明，不假称已经委派。
+
+- Sol 主线程负责理解用户目标、核对真实状态、判断风险与授权、选择代理、作关键决策、整合证据和最终交付。所有任务都先经过判断，但小任务不必委派。
+- 只允许使用 `NO_DELEGATION`、`terra_scout_low`、`terra_audit_medium`、`terra_worker_medium`、`sol_architect_high`、`sol_critical_xhigh`、`sol_reviewer_high` 作为本工作流的路由结果。选择能可靠完成任务的最低充分配置；风险高于表面复杂度，推理等级不等于权限。
+- `NO_DELEGATION`：一次读取、极小且明确的可逆修改，或主线程已拥有完整上下文。
+- `terra_scout_low`：小范围只读定位文件、符号、配置或日志。`terra_audit_medium`：跨文件只读扫描、依赖梳理、测试与日志归纳。二者不作架构、安全、权限、数据库或核心业务的最终判断。
+- `terra_worker_medium`：边界、保留行为和验收标准已明确的普通代码、测试、文档或低风险重构。它只修改直接相关的最少文件，不改变数据库、Auth、RLS、权限、公共接口、生产设置或核心业务规则。
+- `sol_architect_high`：复杂根因、跨模块影响、状态流、竞态、架构取舍和实施拆解；默认只读。`sol_critical_xhigh`：认证、权限、数据库、迁移、删除、隐私、公共 API、生产和不可逆操作的风险判断；默认只读，仍须遵守用户授权。
+- `sol_reviewer_high`：重要、跨模块、高风险或准备合并的改动的独立只读审查。不得只根据实施者的自述接受结果。
+
+## 升级、并行与验收
+
+- 任一代理发现范围扩大、关键歧义、核心业务语义不明、数据库/认证/权限/安全/公共接口影响、不可逆或生产操作、验证不足、可能覆盖用户改动，或原方案失效时，停止扩大操作并返回：`ESCALATE_TO_SOL`，同时列出发现、证据、已执行、未执行、升级原因和建议下一步。
+- 只读的独立搜索、日志收集和证据整理可以并行。禁止多个写入代理同时修改同一文件、状态流或高耦合实现；复杂写入只有一个 `terra_worker_medium` 担任文件负责人。
+- 复杂或高耦合任务采用：`sol_architect_high → terra_worker_medium → 定向测试/构建/运行验证 → sol_reviewer_high → Sol 主线程交付`。
+- 验收分三级：极小机械改动由实施者检查 diff 与最小验证；普通低风险改动由 Sol 检查关键 diff 和验证证据；安全、数据、权限、核心业务、跨模块和重大变更必须经 `sol_reviewer_high` 独立审查。
+- 自定义代理的 `sandbox_mode` 只是默认配置，不是安全边界；父线程实时权限、工作区策略和用户授权始终优先。不得把模型更强或推理更高表述为拥有更多权限。

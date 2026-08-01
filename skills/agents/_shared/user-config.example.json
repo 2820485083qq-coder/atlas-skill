@@ -1,0 +1,23 @@
+{
+  "paths": {
+    "obsidian_vault": "~/ObsidianVault",
+    "paper_notes_folder": "Papers",
+    "daily_papers_folder": "DailyPapers",
+    "concepts_folder": "Concepts",
+    "zotero_db": "~/Zotero/zotero.sqlite",
+    "zotero_storage": "~/Zotero/storage"
+  },
+  "daily_papers": {
+    "keywords": [],
+    "negative_keywords": [],
+    "domain_boost_keywords": [],
+    "arxiv_categories": [],
+    "min_score": 0,
+    "top_n": 30
+  },
+  "automation": {
+    "auto_refresh_indexes": true,
+    "git_commit": false,
+    "git_push": false
+  }
+}

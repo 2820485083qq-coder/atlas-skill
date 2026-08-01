@@ -70,6 +70,23 @@ Choose skills in this order:
 
 Prefer one primary skill plus at most two support skills. Add more only when the deliverable genuinely needs them.
 
+### GPT Web Quota-Saving Route
+
+The user has established `gptweb-offload` as the default external-worker route for two categories:
+
+- image generation or editing, including 生图, 改图, visual ideation, and reference-image edits;
+- project planning, including 项目规划, roadmap, milestones, rollout, implementation sequencing, and execution plans.
+
+For these categories, route to `gptweb-offload` before native `imagegen`, generic planning, PRD, brainstorming, or coding-plan skills. Let the GPT Web skill prepare and submit the compact task brief; do not spend Codex quota drafting the same full image prompt or plan first.
+
+Keep these boundaries:
+
+- The user's standing instruction authorizes submission of the minimal pure-text image/planning prompt, unless the active request says not to submit.
+- Local/reference-file upload and sensitive/private content still require explicit per-request approval.
+- GPT Web output remains in the visible browser and cannot be scraped back. Report submission, not completion.
+- If the user needs an image file returned directly inside Codex, or needs Codex to implement a plan, first use GPT Web as requested, then ask for the manually saved image/path or the approved plan sections.
+- Fall back to native `imagegen` or Codex planning only when GPT Web is unavailable or the user explicitly chooses the fallback.
+
 ### Step 3: Resolve Conflicts
 
 Use these precedence rules:
@@ -81,8 +98,11 @@ Use these precedence rules:
 - "Translate, shorten, expand, humanize, caption, or lightly review a paper paragraph" routes to `awesome-ai-research-writing` before full-paper writing skills.
 - "Nature style" routes to Nature-specific skills before generic academic writing.
 - "Undergraduate thesis from a real project" routes to `academic-paper-strategist` and `academic-paper-composer`.
+- "Paper topic selection", research-direction exploration, or research-question refinement routes first to `academic-research-suite` in its `deep-research` / `socratic` mode when the user has only a broad topic, tentative title, or research interest. Do not begin outlining or drafting until a candidate research question has converged.
+- "Write a complete paper", research-to-paper execution, or paper work that includes hypothesis, experiment, analysis, review, and revision routes to the local AutoResearchClaw Co-Pilot project at `<AutoResearchClaw-project>`, using `config.copilot.yaml` and `--mode co-pilot`. Keep human approval at key decisions; use `academic-research-suite` first for vague topic scoping and PaperSpine later for LaTeX/PDF/Word assembly when needed.
 - "Word/docx final artifact" includes `docx` after content work is settled.
 - "Create/update/install/optimize skills" routes to `skill-creator`, `skill-installer`, or `darwin-skill`.
+- "Generate/edit an image" or "plan a project/roadmap" routes first to `gptweb-offload` under the user's quota-saving preference; native image/planning skills are fallbacks or downstream execution support.
 - "Code implementation/refactor/debug/review" routes through `karpathy-guidelines` before Superpower or domain-specific engineering skills when the task is non-trivial.
 - Perspective skills are advisory lenses, not execution engines; use them only when the user asks for that viewpoint.
 
