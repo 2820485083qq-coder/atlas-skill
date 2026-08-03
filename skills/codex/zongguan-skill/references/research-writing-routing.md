@@ -19,6 +19,14 @@ Not all of these are installed locally. Prefer installed equivalents first.
 
 ## Installed Equivalent Map
 
+- paper topic selection / research-question refinement:
+  - primary: `academic-research-suite` in `deep-research` / `socratic` mode
+  - use before `research-paper-writing`, `PaperSpine`, or paper-outline workflows when the user only has a broad direction, tentative title, or research interest
+- complete research-to-paper execution:
+  - primary: local `AutoResearchClaw` project in Co-Pilot mode
+  - path: `<AutoResearchClaw-project>`
+  - command profile: `config.copilot.yaml` with `--mode co-pilot`
+  - use for hypothesis generation, experiment design/execution, analysis, peer review, revision, and finalization; preserve human approval at key decision gates
 - `20-ml-paper-writing` equivalent:
   - primary: `research-paper-writing`
   - support: `awesome-ai-research-writing` for paragraph operations
@@ -46,6 +54,12 @@ Not all of these are installed locally. Prefer installed equivalents first.
 
 ## Task Routes
 
+- Paper topic selection, thesis topic exploration, or a broad research direction without a clear answerable research question:
+  `academic-research-suite` → `deep-research` → `socratic` mode
+  Ask narrowing questions first; do not generate an outline, draft, or end-to-end paper plan until at least one candidate research question is agreed.
+- Complete paper creation from a research idea, materials, or an approved research question:
+  `AutoResearchClaw` (local clone) → `co-pilot` mode
+  Use the local `config.copilot.yaml`; pause for human guidance at hypothesis, baseline/experiment design, and paper co-writing decisions. Hand off final LaTeX/PDF/Word packaging to PaperSpine only when that artifact-specific assembly is requested.
 - Chinese draft -> English LaTeX paper paragraph:
   `awesome-ai-research-writing`
   Verify LaTeX commands, citations, labels, formulas, `%`, `_`, and `&` escaping.
@@ -84,10 +98,11 @@ Not all of these are installed locally. Prefer installed equivalents first.
 ## Conflict Rules
 
 - If the user asks for a specific installed skill, use it.
+- For paper topic selection or research-question refinement, use `academic-research-suite` before any writing, outlining, or end-to-end paper workflow unless the user already supplies a clear research question and explicitly asks to skip scoping.
+- For end-to-end paper writing or research-to-paper execution, automatically use the local `AutoResearchClaw` Co-Pilot project before generic writing skills; do not silently switch to `--auto-approve`.
 - If the task is only paragraph-level academic language work, prefer `awesome-ai-research-writing`.
 - If the task changes a whole paper's claims, structure, or submission strategy, prefer `research-paper-writing`.
 - If the task is Word/DOCX mechanics, include `docx` after the writing skill.
 - If the task is Nature-specific, use Nature-specific skills before generic paper writing.
 - If the task is thesis-specific, use thesis skills before generic paper writing.
 - If an upstream skill from Leey21 is not installed, do not pretend it was used; route to installed equivalents or recommend installation.
-

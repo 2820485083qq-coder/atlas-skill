@@ -11,6 +11,7 @@ This map reflects the user's visible Codex skill ecosystem at creation time. If 
 - `huashu-nuwa`: create perspective/persona skills from people or themes.
 - `self-improvement`: capture recurring failures or project-specific lessons.
 - `planning-with-files`: persist task plans across long work.
+- `gptweb-offload`: use the local `chatgpt_web` MCP to offload image generation/editing and project-planning prompts to visible ChatGPT Web, preserving Codex quota; output is reviewed manually.
 
 ## Research, Papers, And Academic Writing
 
@@ -62,6 +63,7 @@ These are plugin-provided routes when the Data Analytics plugin is available in 
 
 ## Images And Visuals
 
+- `gptweb-offload`: default route for image generation/editing under the user's quota-saving preference; the image remains in visible ChatGPT for manual Save.
 - `imagegen` / `gpt-image`: generate or edit raster images.
 - `image-enhancer`: enhance screenshots or images.
 - `nature-figure`: academic figure workflow.
@@ -104,6 +106,7 @@ These are installed as low-conflict individual skills from the Codex Superpower 
 
 ## Decision, Planning, And Structured Thinking
 
+- `gptweb-offload`: default first route for project plans, roadmaps, milestones, rollout plans, and implementation sequencing when visible/manual ChatGPT review is acceptable.
 - `decision-planning-frameworks`: structured decision support, 5Why root cause, SWOT, weighted pros/cons, decision tree, scenario planning, OKR, and goal-to-action planning.
 
 ## Perspective Skills
@@ -134,3 +137,5 @@ Use these only when the user asks for a specific person's lens or clearly invoke
 - "装/造/优化skill" -> `skill-installer`, `skill-creator`, or `darwin-skill`.
 - "每周蒸馏/知识库迭代/周五自动化知识库审计" -> `knowledge-weekly-distiller` -> `obsidian`; add `generate-mocs` only if index refresh is explicitly requested.
 - "5Why/SWOT/决策树/OKR/情景规划/利弊分析" -> `decision-planning-frameworks`.
+- "生图/改图/图片创意" -> `gptweb-offload`; use native `imagegen` only when GPT Web is unavailable or the user explicitly needs that fallback.
+- "项目规划/路线图/里程碑/实施计划/rollout plan" -> `gptweb-offload`; after manual review, add execution skills only for work the user brings back to Codex.

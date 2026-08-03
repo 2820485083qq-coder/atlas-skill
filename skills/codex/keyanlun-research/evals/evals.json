@@ -1,0 +1,40 @@
+{
+  "skill_name": "keyanlun-research",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "我研一刚进组，导师只说让我做锂电池方向。我完全不知道怎么找idea，也不知道应该先看什么文献。请按科研论的方法带我走第一步。",
+      "expected_output": "Route to Book 1 for layer diagnosis and Book 2 for search if needed; diagnose the user as layer 2.1/2.2, avoid undirected reading, produce a keyword-refinement and search-query plan, and name the next concrete artifact."
+    },
+    {
+      "id": 2,
+      "prompt": "我已经有一个论文idea，但是做实验很可能要三个月。我担心最后发现不靠谱。用搜聚分验合帮我设计一个最小验证方案。",
+      "expected_output": "Route to Book 4, place the user at layer 3, design a minimal 0-to-1 verification route with pass/fail criteria, evidence required, and fallback actions."
+    },
+    {
+      "id": 3,
+      "prompt": "我的小论文被评价像硕士论文压缩版，缺乏聚焦的科学问题。我已经有大论文、素材库和一些数据，应该怎么改？",
+      "expected_output": "Route to Book 5 first while checking whether Book 3/4 gaps caused the writing issue; diagnose this as a layer 4.2 writing/material alignment issue, check scientific question and evidence chain, and propose a material-library-driven revision order."
+    },
+    {
+      "id": 4,
+      "prompt": "我要选导师，官网上论文很多但我不知道怎么看，怕选错影响毕业和以后职业发展。用科研论1给我一个证据表模板。",
+      "expected_output": "Route to Book 1, frame the task as preserving future options, and produce an advisor-choice evidence table with graduation, publication, student outcome, resource, and risk fields."
+    },
+    {
+      "id": 5,
+      "prompt": "我搜出来几千篇文献，已经导入文献库了，但不知道怎么分组才能形成开题思路。",
+      "expected_output": "Route to Book 3, require grouping purpose first, propose coarse/fine grouping steps, allow an unknown bucket, and output candidate idea fields."
+    },
+    {
+      "id": 6,
+      "prompt": "我用几个关键词搜文献，要么结果太多，要么几乎搜不到。请用科研论2的万能检索式帮我重做检索策略。",
+      "expected_output": "Route to Book 2, split the search target into minimal units, run deletion/addition logic conceptually, explain when to add AND constraints, and output a search-log table rather than vague reading advice."
+    },
+    {
+      "id": 7,
+      "prompt": "我有二十多篇相似论文，想写前言，但不知道怎么把这些论文变成可用的文字素材库。",
+      "expected_output": "Route to Book 5, build an introduction text-material library, tag examples by sentence function, compare same-function examples, preserve provenance, and produce a left-right writing workflow."
+    }
+  ]
+}

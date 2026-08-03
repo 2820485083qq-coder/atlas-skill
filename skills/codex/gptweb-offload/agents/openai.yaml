@@ -1,0 +1,12 @@
+interface:
+  display_name: "GPT Web Offload"
+  short_description: "Offload image and planning work to GPT Web"
+  default_prompt: "Use $gptweb-offload to send this image or project-planning task to ChatGPT Web."
+dependencies:
+  tools:
+    - type: "mcp"
+      value: "chatgpt_web"
+      description: "Local visible-browser MCP for bounded ChatGPT Web image and project-planning prompts"
+      transport: "stdio"
+policy:
+  allow_implicit_invocation: true

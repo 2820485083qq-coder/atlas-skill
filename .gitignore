@@ -21,7 +21,10 @@ venv/
 *.local.*
 *secret*
 *secrets*
-*token*
+token
+token.*
+*.token
+*.token.*
 *credential*
 *credentials*
 *apikey*
@@ -32,3 +35,18 @@ venv/
 *.p12
 *.pfx
 
+# Atlas local configuration and runtime state
+**/user-config.json
+**/user-config.local.json
+**/AGENTS.local.md
+auth.json
+*.sqlite
+*.sqlite-*
+*.db
+*.db-*
+*.jsonl
+sessions/
+archived_sessions/
+shell_snapshots/
+logs/
+cache/
