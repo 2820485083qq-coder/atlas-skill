@@ -1,0 +1,14 @@
+name: nature-paper-trans
+description: Translate selected pages or full English papers into Chinese image-based A4 PDFs with a brief page-review Markdown.
+always_load:
+  - SKILL.md
+references:
+  on_demand:
+    - condition: before the first page-generation request
+      path: references/image-translation-prompt.md
+    - condition: before the one-pass page review
+      path: references/review-guidance.md
+scripts:
+  on_demand:
+    - condition: preparing source pages, tracking results, or assembling deliverables
+      path: scripts/pages.py

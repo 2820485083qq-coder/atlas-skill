@@ -1,6 +1,6 @@
 ---
 name: deepseek-worker
-description: Use whenever a task includes simple, repetitive, low-risk rough work that should be offloaded to DeepSeek to save GPT tokens, especially file scanning, search result grouping, TODO batching, log summarization, first-draft extraction, or "用 DeepSeek 做粗活 / 省 GPT token / DeepSeek subagent / 外部 subagent". This skill routes work through the local `deepseek-worker` sidecar command because current Codex built-in subagents may not expose DeepSeek as a model override.
+description: "通过本地 sidecar 将有限粗加工任务交给 DeepSeek；用于用户要求 DeepSeek 或已有外部调用授权的批处理。"
 ---
 
 # DeepSeek Worker
@@ -33,7 +33,9 @@ Reference docs:
 
 ## When To Use
 
-Prefer `deepseek-worker` for:
+Use the following routes when DeepSeek is requested or the task already authorizes the external call and its cost. Ordinary scanning is handled locally when that is sufficient:
+
+Suitable bounded inputs:
 
 - collecting and grouping search results
 - summarizing logs, notes, READMEs, or command output
@@ -93,7 +95,7 @@ deepseek-worker --model deepseek-v4-pro "Analyze this design note and list trade
 
 ## Workflow
 
-1. Decide whether the subtask is low-risk and bounded.
+1. Confirm a bounded subtask and existing authorization for the external service, data scope, and cost. A generic request to save tokens does not by itself select an external provider.
 2. Gather only the minimum context needed for that subtask.
 3. Run `deepseek-worker` with piped text or explicit `--file` inputs.
 4. Read the output critically.
@@ -108,7 +110,7 @@ If `deepseek-worker` reports that `DEEPSEEK_API_KEY` is unset, tell the user to 
 deepseek-worker-setup-key
 ```
 
-Then ask them to say when it is done. Do not request the key value in the conversation. After the user confirms setup, run:
+Continue independent local work. Only the DeepSeek-dependent step waits for setup; never request the key value in the conversation. After the user confirms setup, run:
 
 ```sh
 deepseek-worker --check-key

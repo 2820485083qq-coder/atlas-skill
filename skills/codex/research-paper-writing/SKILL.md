@@ -1,6 +1,6 @@
 ---
 name: research-paper-writing
-description: Improve academic paper writing quality for ML/CV/NLP-style papers with clear section structure, paragraph flow, and reviewer-facing presentation. Use when drafting or revising Abstract, Introduction, Related Work, Method, Experiments, or Conclusion; polishing figures/tables; checking claim-support alignment; or performing self-review before submission.
+description: "起草或修改 ML/CV/NLP 论文及章节，检查段落逻辑与论断证据；投稿审查按需使用专门参考。"
 ---
 # Research Paper Writing
 
@@ -16,19 +16,19 @@ Prioritize first-impression quality (figures/tables/layout), logical flow, and e
 3. Rewrite paragraph-by-paragraph with one message per paragraph.
 4. Run reverse outlining after writing each section.
 5. Check every major claim in Abstract/Introduction against experimental evidence.
-6. Run final-paper adversarial review with `references/paper-review.md`.
+6. For full-paper or submission review, use `references/paper-review.md`; section edits need only checks relevant to that section.
 
 ## Failure Handling
 
-- If the paper section, target venue, or intended contribution is unclear, ask for that context before major rewriting.
+- Ask about the section, venue or contribution only when the missing context materially changes the requested rewrite; otherwise preserve the existing paper style and continue.
 - If evidence is missing for a claim, weaken or remove the claim rather than inventing support.
 - If the user asks for polishing only, do not restructure the paper story unless the flaw blocks readability.
 - If required reference files are unavailable, proceed with the core workflow and state which specialized guide could not be loaded.
 
 ## CHECKPOINTS
 
-- STOP before adding new experimental claims, comparisons, ablations, or numerical results.
-- STOP before changing the claimed contribution or paper positioning.
+- Use claims, comparisons and numerical results already supported by the provided evidence within the authorized writing scope. Unsupported new results must be omitted, weakened or flagged as needing evidence; continue the supported parts.
+- Clarify before materially changing the contribution or positioning beyond the authorized scope. This does not block faithful drafting from the supplied sources.
 
 ## Do Not Do
 
@@ -44,7 +44,7 @@ Prioritize first-impression quality (figures/tables/layout), logical flow, and e
 4. Maintain sentence-to-sentence flow (cause, contrast, consequence, or refinement).
 5. Iterate with adversarial self-review: read as a skeptical reviewer.
 6. Treat visual quality as core content, not decoration.
-7. Use a clean teaser and pipeline figure.
+7. When figures are part of the requested artifact, use clear figures suited to its content.
 8. Use readable, minimal-ink tables.
 9. Keep formatting consistent and tidy.
 
@@ -85,7 +85,7 @@ Load only the needed section file:
 
 ## Paper Review Core Points
 
-Use `references/paper-review.md` for the full checklist and workflow.
+For requested full-paper or submission review, use `references/paper-review.md` and the following criteria. A section-only edit does not require a full-paper review.
 
 1. Add an end-of-draft self-review question list in five dimensions:
    - contribution,
@@ -104,14 +104,9 @@ Use `references/paper-review.md` for the full checklist and workflow.
 3. Avoid writing style that looks like incremental patching of a naive baseline.
 4. Keep terminology stable across the full paper.
 5. If a claim cannot be supported by results, weaken or remove the claim.
-6. Before finalizing, append and answer a five-dimension self-review question list, then revise the paper based on unresolved items.
+6. Check the requested text for clarity, terminology and source support; use the five-dimension review for full-paper review tasks. Keep internal checks out of the manuscript unless requested.
 7. Do not load all section references (Introduction/Abstract/Related Work/Method/Experiments/Conclusion) at once; load only the specific section guide needed for the current edit target.
 
 ## Output Contract
 
-When asked to rewrite or draft sections, return:
-
-1. A compact section outline (3-7 bullets).
-2. Revised paragraphs with explicit paragraph roles (opening/challenge/method/advantage/evidence/limitation).
-3. A short self-review checklist covering clarity, flow, terminology consistency, unsupported claims, and missing evidence.
-4. A claim-evidence map for each major claim in the revised text using `Claim: ... | Evidence: ... | Status: supported/needs evidence`.
+Deliver the requested finished text in the user's format. Keep outlines, paragraph roles and checks internal unless the user requests them. For a substantial draft, briefly identify important unresolved evidence gaps; provide a separate claim-evidence map when requested or needed to make an audit reviewable. A section edit is complete when that section is written and checked, without expanding into unrelated sections or figures.

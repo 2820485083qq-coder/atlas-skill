@@ -1,0 +1,4 @@
+interface:
+  display_name: "论文 PDF 翻译"
+  short_description: "将英文论文每页一次生图翻译为中文 A4 PDF，并附简洁逐页检查说明，供用户选择更新页"
+  default_prompt: "请使用 $nature-paper-trans 将这篇英文论文的指定页或全文翻译为中文 A4 PDF，尽量保留原版式，并附上逐页检查说明 Markdown。"

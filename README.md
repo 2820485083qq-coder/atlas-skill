@@ -64,3 +64,17 @@ to:
 ~/.codex/bin/<tool-name>
 ~/.codex/docs/<doc-name>
 ```
+## 本机 Skills 与 Agent 设置快照
+
+- `skills/codex/`：来自 `%USERPROFILE%\.codex\skills` 的本机 Codex Skills。
+- `skills/agents/`：来自 `%USERPROFILE%\.agents\skills` 的共享 Agent Skills。
+- `memory/codex/AGENTS.md`：Codex 全局指令。
+- `agents/codex/`：用户自定义 Codex Agent 配置。
+
+系统内置 `.system`、`codex-primary-runtime`、缓存/构建产物和凭据类文件会被排除。主机专属的 `.codex/config.toml` 不属于此快照；它包含项目绑定和 MCP 运行配置。
+
+在 Windows 上刷新快照：
+
+```powershell
+python .\tools\sync-local-agent-snapshot.py
+```

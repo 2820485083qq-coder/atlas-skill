@@ -1,0 +1,23 @@
+{
+  "skill_name": "structured-expression-frameworks",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "把这些零散记录整理成一份给导师看的周报。",
+      "expected_output": "Uses weekly report structure, audience-aware tone, focuses on outcomes, risks, next plan, and support needed.",
+      "files": []
+    },
+    {
+      "id": 2,
+      "prompt": "用SCQA帮我重写这个研究方案开头。",
+      "expected_output": "Uses Situation, Complication, Question, Answer structure and avoids unsupported claims.",
+      "files": []
+    },
+    {
+      "id": 3,
+      "prompt": "用金字塔原理帮我把这段话改成结论先行。",
+      "expected_output": "Produces conclusion-first output with MECE supporting reasons, evidence, risks, and next steps.",
+      "files": []
+    }
+  ]
+}

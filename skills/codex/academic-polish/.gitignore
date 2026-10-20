@@ -1,0 +1,19 @@
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Environment / secrets
+.env
+.env.local
+*.key
+
+# Local edits / drafts
+*.bak
+*.tmp
+drafts/

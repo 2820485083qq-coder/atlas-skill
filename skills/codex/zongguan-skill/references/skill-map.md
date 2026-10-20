@@ -2,6 +2,8 @@
 
 This map reflects the user's visible Codex skill ecosystem at creation time. If the live available-skill list differs, the live list wins.
 
+For the installed Matt Pocock localized engineering/productivity collection, read [`matt-pocock-routing.md`](matt-pocock-routing.md) before selecting a route. That reference is the single routing map for `grill-with-docs`, `grill-me`, `wayfinder`, `to-spec`, `to-tickets`, `implement`, `diagnosing-bugs`, `tdd`, `code-review`, `handoff`, and the other skills from that collection.
+
 ## Meta Skills
 
 - `zongguan-skill`: route and coordinate skills. Do not call recursively.

@@ -1,0 +1,23 @@
+{
+  "skill_name": "knowledge-weekly-distiller",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "请帮我做一次本周知识库蒸馏，输出到每周蒸馏文件夹。",
+      "expected_output": "Uses the atlas Obsidian vault, scans recent Markdown changes, creates a dated weekly distillation report, and does not delete or bulk-rewrite old notes.",
+      "files": []
+    },
+    {
+      "id": 2,
+      "prompt": "基于 Karpathy 的知识库机制，给我一个每周五自动执行的 Codex prompt。",
+      "expected_output": "Produces a self-contained automation prompt with vault path, output folder, scan targets, required Markdown structure, and safety rules.",
+      "files": []
+    },
+    {
+      "id": 3,
+      "prompt": "帮我 lint 一下 Obsidian 知识库，找出本周冲突、无来源结论和下周迭代任务。",
+      "expected_output": "Routes to weekly knowledge-base linting, records conflicts and unsupported claims, and gives concrete next actions without modifying existing notes unless requested.",
+      "files": []
+    }
+  ]
+}

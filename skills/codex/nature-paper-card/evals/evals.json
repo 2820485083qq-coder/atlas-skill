@@ -1,0 +1,50 @@
+{
+  "skill_name": "nature-paper-card",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "Turn this methods paper into a complete Paper Card. Explain why each module exists, which ablation supports it, where the experimental conclusions stop, and propose testable research ideas without claiming novelty.",
+      "expected_output": "A paper-card.md with Sections 01-16, source-grounded method and module analysis, key design choices with sourced or explicitly inferred rationales, experiment-to-claim mapping, bounded conclusions, separated author limitations and Agent analysis, and hypothesis-labelled research candidates followed by a prioritized validation plan. Existing preparation, locator rules, and audit delivery remain required."
+    },
+    {
+      "id": 2,
+      "prompt": "I currently have only the abstract and metadata. Generate a preliminary Paper Card without guessing any unavailable information.",
+      "expected_output": "A visibly Partial Paper Card that identifies Abstract-only coverage, preserves all Sections 01-16 headings, fills only supported fields, and marks unseen methods, figures, experiments, limitations, and ideas as not assessable or provisional."
+    },
+    {
+      "id": 3,
+      "prompt": "Generate a Paper Card for this experimental science paper. Separate author-acknowledged limitations from your critical analysis, and determine whether the evidence supports association, necessity, sufficiency, or mechanism.",
+      "expected_output": "A discovery-oriented Paper Card with causal-strength discipline, figure/evidence pointers, author-stated limitations isolated in Section 12, and falsifiable Agent analysis in Section 13."
+    },
+    {
+      "id": 4,
+      "prompt": "Write the Paper Card in Chinese for this algorithm paper, which also introduces a major training dataset. Distinguish PDF page indices from printed page labels and audit both the system and dataset contributions.",
+      "expected_output": "A Chinese Paper Card using a primary methods lens plus a secondary resource lens, localized headings, unambiguous PDF page pointers, complete figure/table inventory, and separate card-completeness and context-verification statuses."
+    },
+    {
+      "id": 5,
+      "prompt": "The bundled preparation script cannot extract reliable page indices from this paper, but section headings, Figure 2, Table 1, and the Methods text are readable. Generate the Paper Card without writing any replacement Python.",
+      "expected_output": "A structure-grounded Paper Card that declares the canonical locator mode, uses section/figure/table/equation pointers without page numbers, records the preparation failure, and runs the bundled auditor without a source bundle."
+    },
+    {
+      "id": 6,
+      "prompt": "Only the abstract and bibliographic metadata are available. Generate the most honest Paper Card possible without inventing methods, experiments, figures, tables, limitations, or page numbers.",
+      "expected_output": "A source-limited partial Paper Card using only Abstract or Metadata pointers, explicit not-assessable markers, no page citations, and a structure-only audit warning that source-inventory coverage could not be checked. Unseen design choices are not assessable; the next step obtains specific missing evidence rather than inventing an experiment."
+    },
+    {
+      "id": 7,
+      "prompt": "Create a preliminary Paper Card using only this supplied excerpt: Methods: We use a prediction horizon of 20 steps and minimize tracking error. Results: The complete controller has lower tracking RMSE than the baseline in simulation. The excerpt gives no reason for choosing 20, no horizon ablation, and no compute measurements. Explain this design choice and a useful next validation step. Do not fetch external material or run experiments.",
+      "expected_output": "A source-limited Partial card with excerpt locators and the unchanged fallback audit. Section 07 records the horizon choice as Paper, the unstated rationale as unknown, and any plausible rationale or alternative as Analysis or Hypothesis. It does not claim the authors tried alternatives, that horizon 20 caused the gain, or that a shorter horizon is faster. Section 16 first checks missing comparison details or proposes a conditional fair horizon comparison, names the measurements and deliverable, and separates supportive, weakening, and unresolved results without invented thresholds."
+    },
+    {
+      "id": 8,
+      "prompt": "Based on this paper, make a Paper Card and prioritize next-step validation for my project. The paper reports a simulation benefit but lacks a same-information comparison. I have a local simulator, at most six short pilot runs, and no physical platform. If a strong simple baseline matches the proposed method under equal task tolerance, stop this candidate; do not search more parameter variants. Work from the supplied sources only and prepare the plan without executing it.",
+      "expected_output": "Section 16 leads with a feasible same-information comparison within the six-run ceiling, states prerequisites, controlled conditions, metrics, an inspectable output, and uncertainty. Unknown thresholds are identified for estimation rather than fabricated. Later work depends on pilot outcomes. Matching the baseline under the stated criterion stops or narrows the candidate; no automatic variant search, unrequested external search, experiment launch, or physical-validity claim occurs. All 16 sections, provenance classes, and existing audit requirements are retained."
+    },
+    {
+      "id": 9,
+      "prompt": "Generate a source-grounded Paper Card and explain the important design choices, but I only want to understand this paper. Do not propose extensions or any next-step research plan.",
+      "expected_output": "A card with grounded design analysis inside Section 07 and the existing Sections 01-16 structure. Section 16 records that extensions and planning are outside the requested scope rather than generating candidates or a roadmap. Source preparation and the appropriate bundled audit are still performed; no new section, research execution, or schedule is added."
+    }
+  ]
+}

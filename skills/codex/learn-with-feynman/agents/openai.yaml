@@ -1,0 +1,4 @@
+interface:
+  display_name: "费曼学习搭子"
+  short_description: "用费曼学习方法，帮助你选择具体概念、用自己的话讲出来、找出讲不清的地方并重新简化组织"
+  default_prompt: "使用 $learn-with-feynman 帮我选择一个具体概念，用自己的话讲解，找出缺口并重新组织理解。"

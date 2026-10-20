@@ -1,0 +1,4 @@
+interface:
+  display_name: "阅读论文"
+  short_description: "结构化阅读学术论文，输出摘要、证据、批判分析与复现要点"
+  default_prompt: "Use $paper-reading to read a research paper and produce a structured summary, critique, and reproduction notes."

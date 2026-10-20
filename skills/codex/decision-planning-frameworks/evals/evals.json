@@ -1,0 +1,23 @@
+{
+  "skill_name": "decision-planning-frameworks",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "我现在有三个研究方向，不知道选哪个，帮我做个决策树分析。",
+      "expected_output": "Selects decision tree, separates assumptions from facts, compares options by probabilities/payoffs or marks missing data, and gives next actions.",
+      "files": []
+    },
+    {
+      "id": 2,
+      "prompt": "为什么我每周知识库都整理不动？用5Why帮我找根因。",
+      "expected_output": "Uses a 5Why root-cause chain, avoids stopping at shallow reasons, and proposes prevention mechanisms.",
+      "files": []
+    },
+    {
+      "id": 3,
+      "prompt": "帮我把下季度学习目标制定成OKR。",
+      "expected_output": "Creates Objectives with measurable Key Results, current/target values, weekly actions, and risks.",
+      "files": []
+    }
+  ]
+}
